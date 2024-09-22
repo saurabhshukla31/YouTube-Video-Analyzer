@@ -1,4 +1,6 @@
-streamlit==1.17.0
-youtube-transcript-api==0.4.1
-google-generativeai==0.1.0
 fpdf==1.7.2
+protobuf==5.28.2
+setuptools==65.5.0
+streamlit==1.38.0
+youtube_transcript_api==0.4.1
+~treamlit==1.31.1
