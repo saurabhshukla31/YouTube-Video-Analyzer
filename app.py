@@ -11,7 +11,7 @@ import os
 logging.basicConfig(level=logging.INFO)
 
 # Configure Gemini API
-genai.configure(api_key='AIzaSyBhTddjulxSSHo7e7-1orUESyi6hDrJevI')  # Replace with your actual API key
+genai.configure(api_key='AIzaSyASlNNQmvo6zgCFQvjMTMioPJfdYCwDzaU')  # Replace with your actual API key
 
 # Set page config to wide mode
 st.set_page_config(layout="wide")
@@ -91,7 +91,7 @@ def generate_summary(transcript):
     try:
         model = genai.GenerativeModel('gemini-pro')
         response = model.generate_content(
-            f"Provide a comprehensive, well-structured summary of the following transcript in 5-7 paragraphs. "
+            f"Provide a comprehensive, well-structured summary of the following transcript in 7-8 paragraphs. "
             f"Include an introduction, main points with supporting details, and a conclusion. "
             f"Ensure the summary is grammatically correct, free of typos, and captures the key points effectively:\n\n{transcript}"
         )
@@ -169,7 +169,8 @@ st.title('📺 YouTube Video Analyzer')
 
 st.markdown("""
     <div style="padding: 20px; background-color: #3e3e3e; border-radius: 10px; margin-bottom: 20px;">
-        <h5>This tool helps you analyze YouTube videos by providing transcripts, summaries, and interactive quizzes</h5>
+        <h3>Welcome to YouTube Video Analyzer!</h3>
+        <p>This tool helps you analyze YouTube videos by providing transcripts, summaries, and interactive quizzes.</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -189,13 +190,13 @@ if url:
         col1, col2 = st.columns(2)
 
         with col1:
-            if st.button("📊 Generate Summary"):
+            if st.button("📊 Generate Summary", use_container_width=True):
                 with st.spinner('Generating summary...'):
                     summary = generate_summary(transcript)
                     st.session_state.summary = summary
 
         with col2:
-            if st.button("🧠 Generate Quiz"):
+            if st.button("🧠 Generate Quiz", use_container_width=True):
                 with st.spinner('Preparing quiz...'):
                     quiz_text = generate_quiz(transcript)
                     quiz = parse_quiz(quiz_text)
@@ -206,7 +207,7 @@ if url:
         if 'summary' in st.session_state:
             st.subheader("📌 Video Summary")
             st.markdown(f'<div class="summary-text">{st.session_state.summary}</div>', unsafe_allow_html=True)
-            if st.button("💾 Save Summary as PDF"):
+            if st.button("💾 Save Summary as PDF", use_container_width=True):
                 pdf_bytes = save_summary_to_pdf(st.session_state.summary)
                 st.download_button("Download PDF", pdf_bytes, file_name="video_summary.pdf")
 
@@ -227,7 +228,7 @@ if url:
                         st.warning(f"No options available for question {i + 1}")
                     st.markdown("---")
 
-                if st.button("📝 Submit Quiz"):
+                if st.button("📝 Submit Quiz", use_container_width=True):
                     score = sum([1 for u, q in zip(st.session_state.user_answers, quiz) if u == q['correct']])
                     st.balloons()
                     st.success(f"🎉 You scored {score} out of {len(quiz)}!")
