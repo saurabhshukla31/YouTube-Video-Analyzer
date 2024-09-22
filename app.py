@@ -189,13 +189,13 @@ if url:
         col1, col2 = st.columns(2)
 
         with col1:
-            if st.button("📊 Generate Summary", use_container_width=True):
+            if st.button("📊 Generate Summary"):
                 with st.spinner('Generating summary...'):
                     summary = generate_summary(transcript)
                     st.session_state.summary = summary
 
         with col2:
-            if st.button("🧠 Generate Quiz", use_container_width=True):
+            if st.button("🧠 Generate Quiz"):
                 with st.spinner('Preparing quiz...'):
                     quiz_text = generate_quiz(transcript)
                     quiz = parse_quiz(quiz_text)
@@ -206,7 +206,7 @@ if url:
         if 'summary' in st.session_state:
             st.subheader("📌 Video Summary")
             st.markdown(f'<div class="summary-text">{st.session_state.summary}</div>', unsafe_allow_html=True)
-            if st.button("💾 Save Summary as PDF", use_container_width=True):
+            if st.button("💾 Save Summary as PDF"):
                 pdf_bytes = save_summary_to_pdf(st.session_state.summary)
                 st.download_button("Download PDF", pdf_bytes, file_name="video_summary.pdf")
 
@@ -227,7 +227,7 @@ if url:
                         st.warning(f"No options available for question {i + 1}")
                     st.markdown("---")
 
-                if st.button("📝 Submit Quiz", use_container_width=True):
+                if st.button("📝 Submit Quiz"):
                     score = sum([1 for u, q in zip(st.session_state.user_answers, quiz) if u == q['correct']])
                     st.balloons()
                     st.success(f"🎉 You scored {score} out of {len(quiz)}!")
