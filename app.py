@@ -11,7 +11,7 @@ import os
 logging.basicConfig(level=logging.INFO)
 
 # Configure Gemini API
-genai.configure(api_key='AIzaSyASlNNQmvo6zgCFQvjMTMioPJfdYCwDzaU')  # Replace with your actual API key
+genai.configure(api_key='AIzaSyAXoGGT0EVumPhv6PIRLXzt5jn_f4ON9HA')  # Replace with your actual API key
 
 # Set page config to wide mode
 st.set_page_config(layout="wide")
